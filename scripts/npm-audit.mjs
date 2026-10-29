@@ -11,12 +11,13 @@ const severities = ["info", "low", "moderate", "high", "critical"];
 
 /** @type {Record<string, { package: string; reason: string }>} */
 const acceptedAdvisories = {
-	"GHSA-86w9-cpqp-85rv": {
-		package: "node-forge",
+	"GHSA-mrhx-c7xc-m3w5": {
+		package: "zod",
 		reason:
-			"No fixed node-forge release exists. It is only reachable through @earendil-works/gondolin in the private, " +
-			"unpublished gondolin example extension. Gondolin only verifies leaf certificates against its own locally " +
-			"generated CA (public exponent 65537), so the low-exponent signature forgery does not apply.",
+			"The fix (zod 4.6.6) is a new major outside the declared zod ^3.24.1 range of @anthropic-ai/sandbox-runtime, " +
+			"the only production-reachable consumer that pins zod 3, and no zod 3 release backports it. Within the audited " +
+			"production tree zod validates developer-authored tool schemas and trusted API responses in the Anthropic/OpenAI " +
+			"SDKs and the sandbox example extension, not attacker-controlled oversized collections.",
 	},
 };
 
